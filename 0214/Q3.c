@@ -29,8 +29,13 @@ int main(void)
                 {
                     length[i] = tempt;
                 }
+                else if (k == n - 1 && tempt > length[i])
+                {
+                    length[i] = tempt;
+                }
             }
         }
+        tempt = 1;
     }
     for (int x = 0; x < m; x++)
     {
