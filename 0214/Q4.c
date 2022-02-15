@@ -16,25 +16,107 @@ int main(void){
     {
         if (i == 3)
         {
-            l1[i] = (d1[i] - d1[0]) ^ 2 + (d2[i] - d2[0]) ^ 2;
+            int a = d1[i] - d1[0];
+            int b = d2[i] - d2[0];
+            if (a < 0)
+            {
+                a = a * (-1);
+            }
+            if (b < 0)
+            {
+                b = b * (-1);
+            }
+            if (a == 0)
+            {
+                l1[i] = b;
+            }
+            else if (b == 0)
+            {
+                l1[i] = a;
+            }
+            else
+            {
+                l1[i] = a * a + b * b;
+            }
         }
         else
         {
-            l1[i] = (d1[i] - d1[i+1]) ^ 2 + (d2[i] - d2[i+1]) ^ 2; 
+            int a = d1[i] - d1[i+1];
+            int b = d2[i] - d2[i+1];
+            if (a < 0)
+            {
+                a = a * (-1);
+            }
+            if (b < 0)
+            {
+                b = b * (-1);
+            }
+            if (a == 0)
+            {
+                l1[i] = b;
+            }
+            else if (b == 0)
+            {
+                l1[i] = a;
+            }
+            else
+            {
+                l1[i] = a * a + b * b;
+            }
         }
-        printf("%d ", l1[i]);
     }
     for (int i = 0; i < 4; i++)
     {
         if (i == 3)
         {
-            l2[i] = (d3[i] - d3[0]) ^ 2 + (d4[i] - d4[0]) ^ 2;
+            int a = d3[i] - d3[0];
+            int b = d4[i] - d4[0];
+            if (a < 0)
+            {
+                a = a * (-1);
+            }
+            if (b < 0)
+            {
+                b = b * (-1);
+            }
+            if (a == 0)
+            {
+                l2[i] = b;
+            }
+            else if (b == 0)
+            {
+                l2[i] = a;
+            }
+            else
+            {
+                l2[i] = a * a + b * b;
+            }
         }
         else
         {
-            l2[i] = (d3[i] - d3[i+1]) ^ 2 + (d4[i] - d4[i+1]) ^ 2; 
+            int a = d3[i] - d3[i+1];
+            int b = d4[i] - d4[i+1];
+            if (a < 0)
+            {
+                a = a * (-1);
+            }
+            if (b < 0)
+            {
+                b = b * (-1);
+            }
+            if (a == 0)
+            {
+                l2[i] = b;
+            }
+            else if (b == 0)
+            {
+                l2[i] = a;
+            }
+            else
+            {
+                l2[i] = a * a + b * b;
+            } 
         }
-        printf("%d ", l2[i]);
     }
     if (l1[0] == l1[1] == l1[2] == l1[3])
     {
@@ -47,7 +129,7 @@ int main(void){
         printf("No\n");
         p1 = 0;
     }
-    if (l2[0] == l2[1] == l2[2] == l2[3])
+    if (l2[0] == l2[1] && l2[1] == l2[2] && l2[2] == l2[3] && l2[3] == l2[0])
     {
         sqr2 = l2[0] * l2[1] * (n ^ 2);
         printf("Yes %d\n", sqr2);
