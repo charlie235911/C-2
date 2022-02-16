@@ -2,7 +2,8 @@
 #include <math.h>
 
 int main(void){
-    int n, m, p[7000][100];
+    int n, m; 
+    char p[7000][100];
     scanf("%d %d", &n, &m);
     for (int i = 0; i < m; i++)
     {
