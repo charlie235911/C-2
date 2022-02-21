@@ -1,14 +1,13 @@
-#include <iostream>
-using namespace std;
+#include <stdio.h>
 
-int main()
+int main(void)
 {
     int n, ans = 0;
-    cin >> n;
+    scanf("%d", &n);
     int a[n], b[n];
     for (int i = 0; i < n; i++)
     {
-        cin >> a[i] >> b[i];
+        scanf("%d %d", &a[i], &b[i]);
     }
     for (int i = 0; i < n; i++)
     {
@@ -32,9 +31,8 @@ int main()
             {
                 ans = length;
             }
-            length = 0;
         }
-        cout << a[i] << " " << b[i] << " " << ans << endl;
+        printf("%d %d %d\n", a[i], b[i], ans);
         ans = 0;
     }
 }
