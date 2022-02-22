@@ -5,32 +5,73 @@ using namespace std;
 int main(void)
 {
     char n[100000];
-    int l = 0, s = 0, num, total, a[100000];
+    int s = 0, num = 0, ans = 0, check = 0;
     cin >> n;
-    cout << n;
-    for (l = 0; l < strlen(n); l++)
+    if (strlen(n) >= 2)
     {
-        a[l] = n[l] - '0';
-    }
-    for (int i = strlen(n); i > 1; i--)
-    {
-        for (int j = 0; j <= strlen(n) - i; j++)
+        for (int i = strlen(n); i >= 2; i--)
         {
-            for (int k = j; k < j + i; k++)
+            for (int j = 0; j <= strlen(n) - i; j++)
             {
-                s = 1;
-                for (int h = k - j + 1; h < i; h++)
+                num = 0;
+                check = 0;
+                for (int k = j; k < j + i; k++)
                 {
-                    num = n[k] - '0';
-                    s *= 10;
-                    total += num * s;
+                    s = 1;
+                    for (int h = k - j + 1; h < i; h++)
+                    {
+                        s *= 10;
+                        num += (n[k] - '0') * s;
+                    }
+                }
+                for (int x = 2; x * x <= num; x++)
+                {
+                    if (x % 2 == 0 && x > 2)
+                    {
+                        continue;
+                    }
+                    if (num % x == 0)
+                    {
+                        check = 1;
+                        break;
+                    }
+                }
+                if (check == 0)
+                {
+                    if (num > ans)
+                    {
+                        ans = num;
+                    }
                 }
             }
-            for (int i = ; i < count; i++)
-            {
-                /* code */
-            }
-            
         }
+    }
+    for (int i = 0; i < strlen(n); i++)
+    {
+        check = 0;
+        num = n[i] - '0';
+        for (int j = 2; j < num; j++)
+        {
+            if (num % j == 0)
+            {
+                check = 1;
+                break;
+            }
+        }
+        if (check == 0)
+        {
+            if (num > ans)
+            {
+                ans = num;
+            }
+        }
+    }
+    if (ans == 0)
+    {
+        cout << "No prime found" << endl;
+    }
+    else
+    {
+        cout << ans << endl;
     }
 }
