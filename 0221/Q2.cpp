@@ -4,6 +4,7 @@ using namespace std;
 int main(void)
 {
     char a[9][9];
+    int num[10] = {0}, tempt = 0, flag = 0;
     for (int i = 0; i < 9; i++)
     {
         for (int j = 0; j < 9; j++)
@@ -11,64 +12,84 @@ int main(void)
             cin >> a[i][j];
         }
     }
-    int c = 0;
     for (int i = 0; i < 9; i++)
     {
-        for (int j = 0; j < 8; j++)
+        for (int j = 0; j < 9; j++)
         {
-            for (int k = j + 1; k < 9; k++)
+            tempt = (a[i][j] - '0');
+            if (tempt != 0)
             {
-                if (a[i][j] == a[i][k] && a[i][j] != 0)
-                {
-                    cout << "row" << c << " #" << a[i][k] << endl;
-                    c++;
-                    break;
-                }
+                num[tempt]++;
+            }
+            if (num[tempt] > 1)
+            {
+                cout << "row" << i + 1 << " #" << a[i][j] << endl;
+                flag = 1;
+                break;
             }
         }
+        for (int n = 0; n < 10; n++)
+        {
+            num[n] = 0;
+        }
     }
-    int d = 0;
     for (int j = 0; j < 9; j++)
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 9; i++)
         {
-            for (int k = i + 1; k < 9; k++)
+            tempt = (a[i][j] - '0');
+            if (tempt != 0)
             {
-                if (a[i][j] == a[k][j] && a[i][j] != 0)
-                {
-                    cout << "column" << d << " #" << a[k][j] << endl;
-                    d++;
-                    break;
-                }
+                num[tempt]++;
+            }
+            if (num[tempt] > 1)
+            {
+                cout << "column" << j + 1 << " #" << a[i][j] << endl;
+                flag = 1;
+                break;
             }
         }
-    }
-    int e = 0, check = 0;
-    for (int i = 0; i < 7; i + 3)
-    {
-        for (int j = 0; j < 7; j + 3)
+        for (int n = 0; n < 10; n++)
         {
-            for (int h = 0; h < i + 2; h++)
+            num[n] = 0;
+        }
+    }
+    int e = 1, check = 0;
+    for (int i = 0; i < 9; i += 3)
+    {
+        for (int j = 0; j < 9; j += 3)
+        {
+            check = 0;
+            for (int h = i; h < i + 3; h++)
             {
-                for (int k = 0; k < 2; k++)
+                for (int k = j; k < j + 3; k++)
                 {
-                    if (a[h][j] == a[h][j + k] && a[h][j] != 0)
+                    tempt = (a[h][k] - '0');
+                    if (tempt != 0)
                     {
-                        cout << "block" << e << " #" << a[h][j] << endl;
-                        e++;
+                        num[tempt]++;
+                    }
+                    if (num[tempt] > 1)
+                    {
+                        cout << "block" << e << " #" << a[h][k] << endl;
                         check = 1;
+                        flag = 1;
                         break;
                     }
                 }
-                if (check = 1)
+                if (check == 1)
                 {
-                    check = 0;
                     break;
                 }
             }
+            e++;
+            for (int n = 0; n < 10; n++)
+            {
+                num[n] = 0;
+            }
         }
     }
-    if (c == 0 && d == 0 && e == 0)
+    if (flag == 0)
     {
         cout << "true" << endl;
     }
