@@ -2,81 +2,28 @@
 
 int main(int argc, char const *argv[])
 {
-    int j, r, x = 0, ans[177] = {0};
-    while (1 == 1)
+    int j, r, x = 0, ans[100000] = {0};
+    while (scanf("%d %d", &j, &r))
     {
-        scanf("%d %d", &j, &r);
         if (j == 0 && r == 0)
         {
             break;
         }
         else
         {
-            int game[177222] = {0}, score[177222] = {0};
-            for (int i = 0; i < j * r; i++)
+            int vs[512] = {0};
+            int winner = 0;
+            int game = 0;
+            for (int i = 0; i < j*r; ++i)
             {
-                scanf("%d", &game[i]);
-            }
-            if (j == 1)
-            {
-                ans[x] = 1;
-            }
-            else if (r == 1)
-            {
-                int temp1 = 0, temp2 = game[0];
-                for (int i = 0; i < j; i++)
-                {
-                    for (int l = i + 1; l < j; l++)
-                    {
-                        if (game[l] >= temp2)
-                        {
-                            temp2 = game[l];
-                            temp1 = l + 1; 
-                        }
-                        else if (temp2 > game[l] && l == j - 1 && temp2 == game[0])
-                        {
-                            temp1 = 1;
-                        }
-                    }
+                scanf("%d", &game);
+                int current = i % j;
+                vs[current] += game;
+                if (vs[current] >= vs[winner]){
+                    winner = current;
                 }
-                ans[x] = temp1;
             }
-            else
-            {
-                for (int h = 0; h < r; h++)
-                {
-                    for (int k = 0; k < j - 1; k++)
-                    {
-                        for (int l = k + 1; l < j; l++)
-                        {
-                            if (game[h * j + l] >= game[h * j + k])
-                            {
-                                score[l + 1]++;
-                            }
-                            else if (game[h * j + l] < game[h * j + k])
-                            {
-                                score[k + 1]++;
-                            }
-                        }
-                    }
-                }
-                int temp = 0;
-                for (int n = 1; n < j; n++)
-                {
-                    for (int m = n + 1; m <= j; m++)
-                    {
-                        if (score[m] >= score[n])
-                        {
-                            temp = m;
-                        }
-                        else
-                        {
-                            temp = n;
-                        }
-                    }
-                }
-                ans[x] = temp;
-            }
+            ans[x] = winner + 1;
             x++;
         }
     }
@@ -84,4 +31,5 @@ int main(int argc, char const *argv[])
     {
         printf("%d\n", ans[i]);
     }
+    return 0;
 }
