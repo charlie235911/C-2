@@ -1,149 +1,224 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "Staff.h"
 using namespace std;
 
-Staff ::Staff(string name, string staffeditor, string gender, string email, string phone, string unit, string servicecontent, string jobagent, string arrivaldate, string jobtitle)
+Staff::Staff(string Name_, string ID_, string Gender, string Email, string Number, string Unit, string Serve, string Agent, string Date, string Title)
 {
-    setName(name);
-    setStaffeditor(staffeditor);
-    setGender(gender);
-    setEmail(email);
-    setPhone(phone);
-    setUnit(unit);
-    ;
-    setServicecontent(servicecontent);
-    setJobagent(jobagent);
-    setArrivaldate(arrivaldate);
-    setJobtitle(jobtitle);
+    setName_(Name_);
+    setID_(ID_);
+    setGender(Gender);
+    setEmail(Email);
+    setNumber(Number);
+    setUnit(Unit);
+    setServe(Serve);
+    setAgent(Agent);
+    setDate(Date);
+    setTitle(Title);
 }
 
-void Staff ::setName(string newName)
+Staff::Staff(string Name_, string ID_, string Gender, string Email, string Number, string Unit, string Serve, string Agent, string Date, string Title, int newYears, int newMonth, int newDay)
 {
-    if (newName.size() <= 25)
+    setName_(Name_);
+    setID_(ID_);
+    setGender(Gender);
+    setEmail(Email);
+    setNumber(Number);
+    setUnit(Unit);
+    setServe(Serve);
+    setAgent(Agent);
+    setDate(Date);
+    setTitle(Title);
+    Years = 2022-newYears;
+    Month = 12-newMonth+3;
+    Day = 30-newDay+21;
+    if (Day>=30)
     {
-        name = newName;
+        Month++;
+        Day=Day-30;
+    }
+    if (Month>=12)
+    {
+        Years++;
+        Month=Month-12;
+    }
+
+}
+
+void Staff::setName_(string newName_)
+{
+    if (newName_.size() <= 25)
+    {
+        Name_ = newName_;
     }
     else
     {
-        name = newName.substr(0, 25);
+        Name_ = newName_.substr(0, 25);
     }
 }
-
-void Staff ::setStaffeditor(string newStaffeditor)
+void Staff::setID_(string newID_)
 {
-    if (newStaffeditor.size() <= 10)
+    if (newID_.size() <= 10)
     {
-        staffeditor = newStaffeditor;
+        ID_ = newID_;
     }
     else
     {
-        staffeditor = newStaffeditor.substr(0, 10);
+        ID_ = newID_.substr(0, 10);
     }
 }
-
-void Staff ::setGender(string newGender)
+void Staff::setGender(string newGender)
 {
-    gender = newGender;
+    Gender = newGender;
+}
+void Staff::setEmail(string newEmail)
+{
+    Email = newEmail;
+}
+void Staff::setNumber(string newNumber)
+{
+    Number = newNumber;
+}
+void Staff::setUnit(string newUnit)
+{
+    Unit = newUnit;
+}
+void Staff::setServe(string newServe)
+{
+    Serve = newServe;
+}
+void Staff::setAgent(string newAgent)
+{
+    Agent = newAgent;
+}
+void Staff::setDate(string newDate)
+{
+    Date = newDate;
+}
+void Staff::setTitle(string newTitle)
+{
+    Title = newTitle;
+}
+void Staff::setSeniority(int newSeniority)
+{
+    Seniority = newSeniority;
 }
 
-void Staff ::setEmail(string newEmail)
+string Staff::getName_()
 {
-    email = newEmail;
+    return Name_;
+}
+string Staff::getID_()
+{
+    return ID_;
+}
+string Staff::getGender()
+{
+    return Gender;
+}
+string Staff::getEmail()
+{
+    return Email;
+}
+string Staff::getNumber()
+{
+    return Number;
+}
+string Staff::getUnit()
+{
+    return Unit;
+}
+string Staff::getServe()
+{
+    return Serve;
+}
+string Staff::getAgent()
+{
+    return Agent;
+}
+string Staff::getDate()
+{
+    return Date;
+}
+string Staff::getTitle()
+{
+    return Title;
+}
+int Staff::getSeniority()
+{
+    return Seniority;
 }
 
-void Staff ::setPhone(string newPhone)
+bool Staff::operator>(const Staff &obj)
 {
-    phone = newPhone;
+    if (Years == obj.Years)
+    {
+        if (Month == obj.Month)
+        {
+            if (Day == obj.Day)
+            {
+                return 1;
+            }
+            else if (Day > obj.Day)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else if (Month > obj.Month)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    else if (Years > obj.Years)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
-
-void Staff ::setUnit(string newUnit)
+bool Staff::operator<(const Staff &obj)
 {
-    unit = newUnit;
+    if (Years < obj.Years || Month > obj.Month || Day > obj.Day)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
-
-void Staff ::setServicecontent(string newServicecontent)
+/*Staff Staff::operator=(const Staff &obj)
 {
-    servicecontent = newServicecontent;
-}
+    Staff temp(obj.Name_, obj.ID_, obj.Gender, obj.Email, obj.Number, obj.Unit, obj.Serve, obj.Agent, obj.Date, obj.Title , obj.Years , obj.Month ,obj.Day);
+    return temp;
+}*/
 
-void Staff ::setJobagent(string newJobagent)
+void Staff::showinfo()
 {
-    jobagent = newJobagent;
-}
-
-void Staff ::setArrivaldate(string newArrivaldate)
-{
-    arrivaldate = newArrivaldate;
-}
-
-void Staff ::setJobtitle(string newJobtitle)
-{
-    jobtitle = newJobtitle;
-}
-
-string Staff ::getName()
-{
-    return name;
-}
-
-string Staff ::getStaffeditor()
-{
-    return staffeditor;
-}
-
-string Staff ::getGender()
-{
-    return gender;
-}
-
-string Staff ::getEmail()
-{
-    return email;
-}
-
-string Staff ::getPhone()
-{
-    return phone;
-}
-
-string Staff ::getUnit()
-{
-    return unit;
-}
-
-string Staff ::getServicecontent()
-{
-    return servicecontent;
-}
-
-string Staff ::getJobagent()
-{
-    return jobagent;
-}
-
-string Staff ::getArrivaldate()
-{
-    return arrivaldate;
-}
-
-string Staff ::getJobtitle()
-{
-    return jobtitle;
-}
-
-void Staff ::showInfo()
-{
-    cout << "------------------------------------" << endl;
-    cout << "name: " << getName() << endl;
-    cout << "staff editor: " << getStaffeditor() << endl;
-    cout << "gender: " << getGender() << endl;
-    cout << "email: " << getEmail() << endl;
-    cout << "phone: " << getPhone() << endl;
-    cout << "unit: " << getUnit() << endl;
-    cout << "service content: " << getServicecontent() << endl;
-    cout << "job agent: " << getJobagent() << endl;
-    cout << "arrivaldate: " << getArrivaldate() << endl;
-    cout << "job title: " << getJobtitle() << endl;
-    cout << "------------------------------------" << endl;
+    cout << "------------------------------" << endl;
+    cout << "Name = " << getName_() << endl;
+    cout << "ID = " << getID_() << endl;
+    cout << "Gender = " << getGender() << endl;
+    cout << "Email = " << getEmail() << endl;
+    cout << "Number = " << getNumber() << endl;
+    cout << "Unit = " << getUnit() << endl;
+    cout << "Serve = " << getServe() << endl;
+    cout << "Agent = " << getAgent() << endl;
+    cout << "Date = " << getDate() << endl;
+    cout << "Title = " << getTitle() << endl;
+    /*cout << "Years = " << Years << endl;
+    cout << "Month = " << Month << endl;
+    cout << "Day = " << Day << endl;*/
+    cout << "------------------------------" << endl;
 }
